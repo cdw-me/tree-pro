@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="item in data" :key="item.key" :class="{ open: isOpen(item.key, item, parentKey) }">
-      <span :class="['title-bar', { active: isActive(item.key) }]" :data-key="item.key" :style="titleBarStyle">
+      <span draggable="true" :class="['title-bar', { active: isActive(item.key) }]" :data-key="item.key" :style="titleBarStyle">
         <span :class="['switcher', { hidden: isEmptyArray(item.children) }]" @click="onSwitch(item.key)">
           <i class="icon">&gt;</i>
         </span>

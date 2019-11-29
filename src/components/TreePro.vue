@@ -321,6 +321,8 @@ export default {
   flex: 1 1 auto;
   width: 10px;
   height: 100%;
+  padding: 0 6px;
+  font-size: 14px;
   outline: none;
 }
 .tree-pro .title-bar .edit input:not(:focus) {
