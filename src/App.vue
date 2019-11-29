@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="main">
-      <tree-pro :data="data" :openAll="true" />
+      <tree-pro :data="data" :openAll="true" @onEdit="onEdit" @onDelete="onDelete" />
     </div>
   </div>
 </template>
@@ -43,14 +43,29 @@ export default {
             },
             {
               key: '0-1',
-              title: '测试0-1',
-              children: [
-                  
-              ]
+              title: '测试0-1'
             }
           ]
         }
       ]
+    }
+  },
+  methods: {
+    onEdit: function(data, callback) {
+      let key = data.key;
+      if (!key) {
+        this.addNum = this.addNum || 0;
+        ++this.addNum;
+        key = 'new_' + this.addNum;
+      }
+      setTimeout(function() {
+        callback(true, { key });
+      }, 1000);
+    },
+    onDelete: function(data, callback) {
+      setTimeout(function() {
+        callback(true);
+      }, 1000);
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div ref="contextmenu" tabindex="0" :class="['contextmenu', { show } ]" :style="style" @contextmenu="onContextmenu">
-    <div class="item" v-for="item in menu" :key="item.key" @click="onClick(item.key)">{{ item.title }}</div>
+    <div class="item" v-for="item in menus" :key="item.key" @click="onClick(item)">{{ item.title }}</div>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'contextmenu',
   props: {
-    menu: Array
+    menus: Array
   },
   data() {
     return {
@@ -24,7 +24,6 @@ export default {
   },
   computed: {
     style: function() {
-      console.log('style', this.y, this.x);
       return {
         top: this.y + 'px',
         left: this.x + 'px'
@@ -33,10 +32,9 @@ export default {
   },
   methods: {
     onShow: function({ x, y }) {
-      console.log('show');
+      console.log('contextmenu show');
       this.x = x;
       this.y = y;
-      console.log(this.x, this.y);
       this.show = true;
       const contextmenu = this.$refs.contextmenu;
       this.$nextTick(function() {
@@ -51,8 +49,9 @@ export default {
     onBlur: function() {
       this.onHide();
     },
-    onClick: function() {
+    onClick: function(item) {
       this.onHide();
+      this.$emit('click', item);
     },
     onContextmenu: function($event) {
       $event.preventDefault();
