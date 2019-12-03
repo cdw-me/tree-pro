@@ -7,13 +7,8 @@
 </template>
 
 <script>
-import TreePro from './components/TreePro.vue'
-
 export default {
   name: 'app',
-  components: {
-    TreePro
-  },
   data() {
     return {
       data: [
